@@ -4,7 +4,7 @@ $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
 $config = [
-    'id' => 'basic',
+    'id' => 'blackout-basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'aliases' => [
@@ -52,14 +52,17 @@ $config = [
 
             ],
         ],
-        /*
+
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                "<controller:\w+>/<action:\w+>" => "<controller>/<action>",
+                "<controller:\w+>/<id:\d+>" => "<controller>/view",
+                "<controller:\w+>/<action:\w+>/<id:\d+>" => "<controller>/<action>",
+                "<module:\w+>/<controller:\w+>/<action:\w+>" => "<module>/<controller>/<action>"
             ],
         ],
-        */
         'formatter' => [
             'class' => '\app\components\Formatter',
             //uncomment following year to use ICU Buddhist calendar

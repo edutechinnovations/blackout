@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'Yii2 Basic Plus';
+$this->title = 'Blackout';
 \jp3cki\yii2\flot\FlotAsset::register($this);
 \jp3cki\yii2\flot\FlotTimeAsset::register($this);
 

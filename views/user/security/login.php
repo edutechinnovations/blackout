@@ -64,7 +64,7 @@ $this->title = Yii::t('user', 'Sign in');
                         'baseAuthUrl' => ['/user/security/auth'],
                     ]) ?>
                     <div>
-                        <h1><i class="fa fa-paw"></i> appBasic+</h1>
+                        <h1><i class="fa fa-paw"></i> Blackout</h1>
                         <p>©2017-2018 All Rights Reserved by Prasit Gebsaap. This application uses Yii2 framework and Gentelella template.</p>
                     </div>
                 </div>
