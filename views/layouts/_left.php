@@ -38,20 +38,19 @@ use yii\helpers\Html;
                     [
                         "items" => [
                             ["label" => "Home", "url" => "/", "icon" => "home"],
-                            ['label' => "About", "url" => ["/site/about"], "icon" => "adn"],
-                            ["label" => "Contact", "url" => ["/site/contact"], "icon" => "phone"],
-                            ["label" => "Layout", "url" => ["site/layout"], "icon" => "files-o"],
-                            ["label" => "Error page", "url" => ["site/error-page"], "icon" => "close"],
-                            [
-                                "label" => "Widgets",
+                            ['label' => "Calender", "url" => ["/site/about"], "icon" => "calendar"],
+//                           ["label" => "Contact", "url" => ["/site/contact"], "icon" => "phone"],
+//                            ["label" => "Layout", "url" => ["site/layout"], "icon" => "files-o"],
+//                            ["label" => "Error page", "url" => ["site/error-page"], "icon" => "close"],
+/*                            [
+                                "label" => "Additional Information",
                                 "icon" => "th",
                                 "url" => "#",
                                 "items" => [
                                     ["label" => "Menu", "url" => ["site/menu"]],
-                                    ["label" => "Panel", "url" => ["site/panel"]],
-                                ],
-                            ],
-                            [
+                                    ["label" => "Panel", "url" => ["site/panel"]],                                ],
+                            ],*/
+/*                            [
                                 "label" => "Badges",
                                 "url" => "#",
                                 "icon" => "table",
@@ -74,26 +73,30 @@ use yii\helpers\Html;
                                         "badgeOptions" => ["class" => "label-danger"],
                                     ],
                                 ],
-                            ],
+                            ],*/
                             [
-                                "label" => "Multilevel",
+                                "label" => "Additional Information",
                                 "url" => "#",
-                                "icon" => "table",
+                                "icon" => "folder-open",
                                 "items" => [
-                                    [
+/*                                    [
                                         "label" => "Second level 1",
                                         "url" => "#",
-                                    ],
+                                    ],*/
                                     [
-                                        "label" => "Second level 2",
+                                        "label" => "Organization",
                                         "url" => "#",
                                         "items" => [
                                             [
-                                                "label" => "Third level 1",
+                                                "label" => "Primary",
                                                 "url" => "#",
                                             ],
                                             [
-                                                "label" => "Third level 2",
+                                                "label" => "Branch",
+                                                "url" => "#",
+                                            ],
+                                            [
+                                                "label" => "Subordinate",
                                                 "url" => "#",
                                             ],
                                         ],
