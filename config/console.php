@@ -32,14 +32,20 @@ $config = [
         'user' => [
             'class' => 'dektrium\user\Module',
         ],
-    ],
-    /*
+    ],/*
     'controllerMap' => [
-        'fixture' => [ // Fixture generation command line.
-            'class' => 'yii\faker\FixtureController',
+        'migrate' => [
+            'class' => 'yii\console\controllers\MigrateController',
+            'migrationPath' => null, // disable non-namespace migrations if app\migrations is listed below
+            'migrationTable' => 'migration',
+            'migrationNamespaces' => [
+                'app\migrations', // Common migrations for the whole application
+                'vendor\machour\yii2-notifications\migrations',
+                'vendor\dektrium\yii2-user\migrations',
+                'vendor\thyseus\yii2-message\migrations'
+            ],
         ],
-    ],
-    */
+    ],*/
 ];
 
 if (YII_ENV_DEV) {

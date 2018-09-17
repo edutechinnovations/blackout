@@ -21,7 +21,9 @@
         "jp3cki/yii2-flot": "*",
         "soap/yii2-jqvmap-asset": "~1.0",
         "loveorigami/yii2-notification-wrapper": "*",
-        "machour/yii2-notifications": "*"
+        "machour/yii2-notifications": "*",
+        "kartik-v/yii2-widget-depdrop": "@dev",
+        "thyseus/yii2-message": "^0.3.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
