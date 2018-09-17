@@ -23,7 +23,7 @@ class m180907_194824_organization_unit extends Migration
                 'name'=> $this->string(200)->notNull(),
                 'short_name'=> $this->string(20)->notNull(),
                 'unit_code'=> $this->string(10)->notNull(),
-                'report_to'=> $this->integer(11)->notNull(),
+                'report_to'=> $this->integer(11),
                 'status'=> $this->integer(11)->notNull()->defaultValue(1),
                 'created_at'=> $this->integer(11)->notNull(),
                 'updated_at'=> $this->integer(11)->notNull(),

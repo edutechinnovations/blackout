@@ -38,7 +38,7 @@ use yii\helpers\Html;
                     [
                         "items" => [
                             ["label" => "Home", "url" => "/", "icon" => "home"],
-                            ['label' => "Calender", "url" => ["/site/about"], "icon" => "calendar"],
+                            ['label' => "Calendar", "url" => ["/site/about"], "icon" => "calendar"],
 //                           ["label" => "Contact", "url" => ["/site/contact"], "icon" => "phone"],
 //                            ["label" => "Layout", "url" => ["site/layout"], "icon" => "files-o"],
 //                            ["label" => "Error page", "url" => ["site/error-page"], "icon" => "close"],
@@ -87,18 +87,26 @@ use yii\helpers\Html;
                                         "label" => "Organization",
                                         "url" => "#",
                                         "items" => [
-                                            [
-                                                "label" => "Primary",
-                                                "url" => "#",
-                                            ],
-                                            [
-                                                "label" => "Branch",
-                                                "url" => "#",
-                                            ],
-                                            [
-                                                "label" => "Subordinate",
-                                                "url" => "#",
-                                            ],
+                                                [
+                                                    'label' => 'Unit Types',
+                                                    'url' => '/blackout/unit-type/index'
+                                                ],
+                                                [
+                                                    "label" => "Organization Units",
+                                                    "url" => "/blackout/unit/index",
+                                                ],
+                                                [
+                                                    "label" => "Primary Units",
+                                                    "url" => "#",
+                                                ],
+                                                [
+                                                    "label" => "Branch Units",
+                                                    "url" => "#",
+                                                ],
+                                                [
+                                                    "label" => "Subordinate Units",
+                                                    "url" => "#",
+                                                ],
                                         ],
                                     ],
                                 ],

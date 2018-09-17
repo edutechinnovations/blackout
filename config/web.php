@@ -99,6 +99,10 @@ $config = [
                 return \Yii::$app->user->id;
             }
         ],
+        'blackout' => [
+                'class' => 'app\modules\blackout\Module'
+        ]
+
     ],
     'params' => $params,
 ];
