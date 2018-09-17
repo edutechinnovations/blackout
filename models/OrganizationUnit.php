@@ -56,7 +56,7 @@ class OrganizationUnit extends \yii\db\ActiveRecord
             }, 'whenClient' => "function (attribute, value) {
                     return $('#organizationunit-unit_type_id').val() != '1';
             }"],
-            [['short_code'], 'required', 'when' => function($model) {
+            [['short_name'], 'required', 'when' => function($model) {
                 return ($model->unit_type_id == '1');
             }, 'whenClient' => "function (attribute, value) {
                     return $('#organizationunit-unit_type_id').val() == '1';
