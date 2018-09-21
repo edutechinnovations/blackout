@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\OrganizationUnit */
@@ -29,10 +30,29 @@ use yii\widgets\ActiveForm;
                 </div>
                 <div class="col-sm-6">
                     <?= $form->field($model, 'unit_type_id')->dropDownList($unitTypes, [
+                            'id' => 'unit-type-id',
                             'prompt' => 'Select unit type...']
                     ) ?>
 
-                    <?= $form->field($model, 'report_to')->textInput() ?>
+                    <?= $form->field($model, 'report_to')->widget(
+                            \kartik\depdrop\DepDrop::className(),
+                            [
+                                'options' => ['id'=>'report-to'],
+                                'pluginOptions'=>[
+                                    'depends'=>['unit-type-id'],
+                                    'placeholder' => 'Select...',
+                                    'url' => Url::to(['unit/parent'])
+                                ],
+                                'pluginEvents' => [
+                                    "depdrop:init" => "function() { console.log('depdrop:init'); }",
+                                    "depdrop:ready" => "function() { console.log('depdrop:ready'); }",
+                                    "depdrop:change" => "function(event, id, value, count) { console.log(id); log(value); log(count); }",
+                                    "depdrop:beforeChange" => "function(event, id, value) { console.log('depdrop:beforeChange'); }",
+                                    "depdrop:afterChange" => "function(event, id, value) { console.log('depdrop:afterChange'); }",
+                                    "depdrop:error" => "function(event, id, value) { console.log('depdrop:error'); }",
+                                ]
+                            ]
+                    )?>
 
                     <?= $form->field($model, 'status')->dropDownList(['1' => 'Yes', '0' => 'No']) ?>
                 </div>

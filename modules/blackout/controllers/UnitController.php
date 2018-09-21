@@ -10,12 +10,25 @@ use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use kartik\depdrop\DepDropAction;
 
 /**
  * UnitController implements the CRUD actions for OrganizationUnit model.
  */
 class UnitController extends Controller
 {
+    // inside the controller
+    public function actions()
+    {
+        return ArrayHelper::merge(parent::actions(), [
+            'parent' => [
+                'class' => DepDropAction::className(),
+                'outputCallback' => function ($selectedId, $params) {
+                    return $this->getUnitList($selectedId);
+                }
+            ]
+        ]);
+    }
     /**
      * {@inheritdoc}
      */
@@ -67,17 +80,15 @@ class UnitController extends Controller
     public function actionCreate()
     {
         $model = new OrganizationUnit();
-        if (Yii::$app->request->isPost) {
-            var_dump(Yii::$app->request->post()['OrganizationUnit']);
 
-        }
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
             'model' => $model,
-            'unitTypes' => $this->getUnitTypeList()
+            'unitTypes' => $this->getUnitTypeList(),
+            'units' => $this->getUnitList()
         ]);
     }
 
@@ -98,8 +109,8 @@ class UnitController extends Controller
 
         return $this->render('update', [
             'model' => $model,
-            'unitTypes' => $this->getUnitTypeList()
-
+            'unitTypes' => $this->getUnitTypeList(),
+            'units' => $this->getUnitList($id)
         ]);
     }
 
@@ -123,7 +134,19 @@ class UnitController extends Controller
      */
     protected function getUnitTypeList()
     {
-        return ArrayHelper::map(UnitType::find()->select(['id', 'name'])->asArray()->all(), 'id', 'name');
+        return ArrayHelper::map(UnitType::find()
+            ->select(['id', 'name'])->asArray()->all(),
+            'id', 'name');
+    }
+
+    protected function getUnitList($id = null)
+    {
+        $query = OrganizationUnit::find()
+            ->select(['id', 'name',]);
+
+        if ($id == null) $query->where(['<>', 'id', $id]);
+
+        return ArrayHelper::map($query->asArray()->all(),'id','name');
     }
 
     /**

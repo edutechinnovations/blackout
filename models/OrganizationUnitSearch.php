@@ -12,6 +12,7 @@ use app\models\OrganizationUnit;
  */
 class OrganizationUnitSearch extends OrganizationUnit
 {
+    public $parentName;
     /**
      * {@inheritdoc}
      */
@@ -19,7 +20,7 @@ class OrganizationUnitSearch extends OrganizationUnit
     {
         return [
             [['id', 'report_to', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
-            [['name', 'short_name', 'unit_code'], 'safe'],
+            [['name', 'short_name', 'unit_code', 'parentName'], 'safe'],
         ];
     }
 
@@ -41,12 +42,32 @@ class OrganizationUnitSearch extends OrganizationUnit
      */
     public function search($params)
     {
-        $query = OrganizationUnit::find();
+        $query = OrganizationUnit::find()->joinWith('parent');
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'attributes' => [
+                    'short_name',
+                    'unit_code',
+                    'parentName' => [
+                        'asc' => [
+                            'parent.name' => SORT_ASC,
+                        ],
+                        'desc' => [
+                            'parent.name' => SORT_DESC,
+                        ],
+                        'label' => 'Report To',
+                        'default' => SORT_ASC
+                    ],
+                    'status' => [
+                        'label' => 'Active',
+                        'default' => SORT_DESC
+                    ]
+                ]
+            ]
         ]);
 
         $this->load($params);
@@ -67,6 +88,11 @@ class OrganizationUnitSearch extends OrganizationUnit
             'created_by' => $this->created_by,
             'updated_by' => $this->updated_by,
         ]);
+
+        // filter by parent name
+        if (!empty($this->parentName)) {
+            $query->andFilterWhere(['like', 'parent.name', $this->parentName]);
+        }
 
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'short_name', $this->short_name])

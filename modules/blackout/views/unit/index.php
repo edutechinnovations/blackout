@@ -11,27 +11,36 @@ $this->title = Yii::t('app', 'Organization Units');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="organization-unit-index">
+    <div class="x_panel">
+        <div class="x_title">
+            <h3><?= Html::encode($this->title) ?></h3>
+        </div>
+        <div class="x_content">
+            <?php Pjax::begin(); ?>
+            <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+            <p>
+                <?= Html::a(Yii::t('app', 'Create Organization Unit'), ['create'], ['class' => 'btn btn-success']) ?>
+            </p>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Organization Unit'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-            'name',
-            'short_name',
-            'unit_code',
-            'report_to',
-            'status',
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
-    <?php Pjax::end(); ?>
+            <?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                'filterModel' => $searchModel,
+                'columns' => [
+                    ['class' => 'yii\grid\SerialColumn'],
+                    'name',
+                    'short_name',
+                    'unit_code',
+                    'parentName',
+                    [
+                        'attribute' => 'status',
+                        'label' => 'Active',
+                        'format' => 'boolean'
+                    ],
+                    ['class' => 'yii\grid\ActionColumn'],
+                ],
+            ]); ?>
+            <?php Pjax::end(); ?>
+        </div>
+    </div>
 </div>

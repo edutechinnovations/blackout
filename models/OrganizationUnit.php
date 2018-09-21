@@ -45,21 +45,21 @@ class OrganizationUnit extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'short_name', 'unit_code'], 'required'],
+            [['name', 'unit_code'], 'required'],
             [['report_to', 'status', 'unit_type_id'], 'integer'],
             [['name'], 'string', 'max' => 200],
             [['short_name'], 'string', 'max' => 20],
             [['unit_code'], 'string', 'max' => 10],
             [['unit_code', 'name'], 'unique'],
-            [['report_to'], 'required', 'when' => function($model) {
-                return ($model->unit_type_id != '1');
+            ['report_to', 'required', 'when' => function($model) {
+                return ($model->unit_type_id != 1);
             }, 'whenClient' => "function (attribute, value) {
-                    return $('#organizationunit-unit_type_id').val() != '1';
+                    return $('#unit-type-id').val() != '1';
             }"],
-            [['short_name'], 'required', 'when' => function($model) {
-                return ($model->unit_type_id == '1');
+            ['short_name', 'required', 'when' => function($model) {
+                return ($model->unit_type_id == 1);
             }, 'whenClient' => "function (attribute, value) {
-                    return $('#organizationunit-unit_type_id').val() == '1';
+                    return $('#unit-type-id').val() == '1';
             }"]
         ];
     }
@@ -76,12 +76,24 @@ class OrganizationUnit extends \yii\db\ActiveRecord
             'unit_code' => Yii::t('app', 'Unit Code'),
             'unit_type_id' => Yii::t('app', 'Unit Type'),
             'report_to' => Yii::t('app', 'Report To'),
+            'parentName' => Yii::t('app', 'Report To'),
             'status' => Yii::t('app', 'Status'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
             'created_by' => Yii::t('app', 'Created By'),
             'updated_by' => Yii::t('app', 'Updated By'),
         ];
+    }
+
+    public function getParent()
+    {
+        return $this->hasOne(self::className(), ['id' => 'report_to'])
+            ->from(self::tableName(). ' AS parent');
+    }
+
+    public function getParentName()
+    {
+        return $this->parent->name;
     }
 
     /**
